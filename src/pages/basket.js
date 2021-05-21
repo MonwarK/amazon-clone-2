@@ -16,7 +16,7 @@ function basket() {
     .reduce((a,b) => a + b, 0)
 
     return (
-        <div className="bg-gray-100 h-screen">
+        <div className="bg-gray-100 dark:bg-gray-800 min-h-screen">
             <Header />
 
             <div className="grid grid-flow-row-dense lg:grid-cols-3">

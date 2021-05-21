@@ -52,7 +52,7 @@ export default function Home() {
 
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gray-100 dark:bg-gray-800 h-screen">
       <Head>
         <title>Amazon 2.0</title>
       </Head>

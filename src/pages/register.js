@@ -39,7 +39,7 @@ function register() {
     }
 
     return (
-        <div className="bg-gray-100 h-screen">
+        <div className="bg-gray-100 dark:bg-gray-800 min-h-screen">
         
         <Header />
         {

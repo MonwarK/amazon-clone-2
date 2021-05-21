@@ -4,7 +4,8 @@ import { useRouter } from "next/router"
 import {
     MenuIcon,
     ShoppingCartIcon,
-    SearchIcon
+    SearchIcon,
+    SunIcon
 } from "@heroicons/react/outline"
 import { useSelector } from 'react-redux'
 import { selectUser } from '../slices/userSlice'
@@ -19,6 +20,17 @@ function Header() {
     const basket = useSelector(selectItems)
 
     const [sidebar, setSidebar] = useState(false)
+
+    const changeTheme = () => {
+        let htmlClasses = document.querySelector('html').classList;
+        if(localStorage.theme == 'dark') {
+            htmlClasses.remove('dark');
+            localStorage.removeItem('theme')
+        } else {
+            htmlClasses.add('dark');
+            localStorage.theme = 'dark';
+        }
+    }
 
     return (
         <>
@@ -37,7 +49,7 @@ function Header() {
                 </div>
 
                 {/* Search Bar */}
-                <div className="hidden sm:flex items-center h-10 rounded-md flex-grow bg-yellow-400 cursor-pointer hover:bg-yellow-500 whitespace-nowrap">
+                <div className="hidden sm:flex items-center h-10 rounded-md flex-grow bg-yellow-400 dark:bg-red-600 cursor-pointer hover:bg-yellow-500 whitespace-nowrap">
                     <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
                     <SearchIcon className="h-12 p-4" />
                 </div>
@@ -61,6 +73,10 @@ function Header() {
                         <ShoppingCartIcon className="h-10" />
                         <p className="hidden md:inline font-extrabold md:text-sm">Basket</p>
                     </div>
+                    <SunIcon 
+                        className="h-10 cursor-pointer"
+                        onClick={changeTheme}
+                    />
                 </div>
             </div>
 
