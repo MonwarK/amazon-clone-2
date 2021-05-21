@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from "next/image"
+import { useRouter } from "next/router"
 import {
     MenuIcon,
     ShoppingCartIcon,
     SearchIcon
 } from "@heroicons/react/outline"
+import { useSelector } from 'react-redux'
+import { selectUser } from '../slices/userSlice'
+import { auth } from '../Firebase'
+import Sidebar from './Sidebar'
+import { selectItems } from '../slices/basketSlice'
 
 function Header() {
+
+    const router = useRouter()
+    const user = useSelector(selectUser)
+    const basket = useSelector(selectItems)
+
+    const [sidebar, setSidebar] = useState(false)
+
     return (
+        <>
         <header className="">
 
             {/* Top Navigation */}
             <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
-                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
+                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0" onClick={() => router.push("/")}>
                     <Image  
                         src="https://links.papareact.com/f90"
                         width={150}
                         height={40}
                         objectFit="contain"
-                        className="cursor-pointer"
+                        className="cursor-pointer w-24"
                     />
                 </div>
 
@@ -30,18 +44,18 @@ function Header() {
 
                 {/* Right */}
                 <div className="text-white flex items-center text-xs space-x-6 mx-6">
-                    <div className="link">
-                        <p>Hello Monwar Khan</p>
+                    <div className="link" onClick={() => user.user?auth.signOut():router.push("/login")}>
+                        <p>Hello {user.user?.displayName},</p>
                         <p className="font-extrabold md:text-sm">Account & Lists</p>
                     </div>
                     <div className="link">
                         <p>Returns</p>
                         <p className="font-extrabold md:text-sm">& Orders</p>
                     </div>
-                    <div className="relative link flex items-center">
+                    <div className="relative link flex items-center" onClick={() => router.push("/basket")}>
                         
                         <span className="absolute right-0 md:right-1/2 top-0 bg-red-400 w-4 h-4 text-center font-bold rounded-full">
-                            0
+                            {basket.length}
                         </span>
 
                         <ShoppingCartIcon className="h-10" />
@@ -51,8 +65,8 @@ function Header() {
             </div>
 
             {/* Bottom Navigation */}
-            <div className="flex items-center space-x-5 p-2 bg-amazon_blue-light text-white text-sm">
-                <p className="link flex items-center">
+            <div className="flex items-center space-x-5 p-2 bg-amazon_blue-light text-white text-sm text-center">
+                <p className="link flex items-center" onClick={() => sidebar?setSidebar(false):setSidebar(true)}>
                     <MenuIcon className="h-6 mr-1"/>
                     All
                 </p>
@@ -68,6 +82,15 @@ function Header() {
 
             </div>
         </header>
+
+        
+        {
+            sidebar?
+            <Sidebar />
+            :null
+        }
+
+        </>
     )
 }
 

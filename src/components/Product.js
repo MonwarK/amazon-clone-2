@@ -2,9 +2,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket, selectItems } from "../slices/basketSlice";
 
 export default function Product({id, title, price, description, category, image}) {
     
+    const dispatch = useDispatch()
+    const basket = useSelector(selectItems)
+
     const [rating] = useState(
         Math.floor(
             Math.random()*5 + 1
@@ -50,7 +55,19 @@ export default function Product({id, title, price, description, category, image}
                 )
             }
 
-            <button className="mt-auto button">Add to Basket</button>
+            <button 
+                className="mt-auto button"
+                onClick={() => {
+                    dispatch(addToBasket({
+                        id: id,
+                        title : title, 
+                        price : price, 
+                        description : description, 
+                        category : category, 
+                        image : image
+                    }))
+                }}
+            >Add to Basket</button>
         </div>
     )
 }
