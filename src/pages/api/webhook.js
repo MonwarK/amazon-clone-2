@@ -9,7 +9,7 @@ const app = !admin.apps.length ? admin.initializeApp({
 
 const stripe = require("stripe")("sk_test_51ItwrSDwKvK3YNUPo1lgmlmkLTwLvPdIVuFgL7SAcjwQ4k0Le4aZlDmOrsFNxpyflICN8HAhZN6g0mpo15DGP5na00f6yKDTdJ");
 
-const endpointSecret = "whsec_e5pg34ofcn29AIFOMb5pLXINqfWLkHHh"
+const endpointSecret = "whsec_0rdwAt6CjhVq8UCiRbjuoPRuFvfZJZ3P"
 
 const fulfillOrder = async (session) => {
     console.log("Fulfilling order", session)
