@@ -24,15 +24,12 @@ function register() {
             password
         )
         .then(() => {
-            alert("Successfully created user");
-        })
-        .catch(err => alert(err))
-        .then(() => {
             auth.updateCurrentUser({
                 displayName: firstName + surname
             })
-            auth.signOut()
         })
+        .catch(err => alert(err))
+        
     }
 
     if(user.user){
