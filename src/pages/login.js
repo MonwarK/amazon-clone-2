@@ -1,43 +1,21 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { auth, signInWithGoogle } from "../Firebase";
-import { selectUser, signIn, signOut, userSlice } from "../slices/userSlice";
+import { selectUser } from "../slices/userSlice";
 
 export default function Home() {
 
-  const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const router = useRouter()
 
   if(user.user){
     router.replace("/")
   }
-
-  useEffect(() => {
-    auth.onAuthStateChanged(
-      auth => {
-        if(auth){
-          dispatch(
-            signIn({
-              uid: auth.uid,
-              email: auth.email,
-              displayName: auth.displayName
-            })
-          )
-        } 
-        else{
-          dispatch(
-            signOut()
-          )
-        }
-      }
-    )
-  }, [])
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -47,7 +25,7 @@ export default function Home() {
       email,
       password
     )
-    .then(res => alert("Successfully logged in"))
+    .then(() => alert("Successfully logged in"))
     .catch(err => alert(err))
   }
 

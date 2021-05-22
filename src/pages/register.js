@@ -19,19 +19,20 @@ function register() {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const register = () => {
-        auth.createUserWithEmailAndPassword(
-            email,
-            password
-        )
-        .then((authUser) => {
-            authUser.user.updateProfile({
-                displayName: firstName + " " + surname
+        if(firstName && surname && password===confirmPassword && password){
+            auth.createUserWithEmailAndPassword(
+                email,
+                password
+            )
+            .then((authUser) => {
+                authUser.user.updateProfile({
+                    displayName: firstName + " " + surname
+                })
+                auth.signOut();
+                alert("User created")
             })
-            auth.signOut();
-            alert("User created")
-        })
-        .catch(err => alert(err))
-        
+            .catch(err => alert(err))
+        }
     }
 
     if(user.user){

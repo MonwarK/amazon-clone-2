@@ -5,6 +5,9 @@ import { selectItems } from '../slices/basketSlice'
 import { selectUser } from '../slices/userSlice'
 import Currency from "react-currency-formatter"
 import Footer from '../components/Footer'
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+const stripePromise = loadStripe("pk_test_51ItwrSDwKvK3YNUPaPffoXaCmEawM3UtTF0b52V22sPt9DpwxLkdEReAbdHe3k8Y2IRGljdODGgQ1p6EfhvmVj4Q00niXo3tla");
 
 function basket() {
 
@@ -15,6 +18,24 @@ function basket() {
         price
     )
     .reduce((a,b) => a + b, 0)
+
+    const createCheckoutSession = async () => {
+        const stripe = await stripePromise;
+
+        // Call the backend to create a checkout session...
+        const checkoutSession = 
+        await axios.post("/api/create-checkout-session", {
+            items: basket,
+            email: user.user.email
+        })
+
+        // Redirect to Stripe checkout
+        const result = await stripe.redirectToCheckout({
+            sessionId: checkoutSession.data.id,
+        })
+
+        if(result.error) alert(result.error.message)
+    }
 
     return (
         <div className="bg-gray-100 dark:bg-gray-800 min-h-screen flex flex-col">
@@ -33,16 +54,18 @@ function basket() {
                                     <p>3 Stars</p>
                                     <Currency quantity={price} currency="GBP" />
                                 </div>
-                                {/* <div>
-                                    Qty: 1
-                                </div> */}
                             </div>
                         )
                     }
                 </div>
                 <div className="h-36 bg-white shadow-2xl p-8 md:col-span-1 m-4">
                     <p className="mb-4 text-center font-semibold text-lg">Total price: <Currency quantity={totalPrice} currency="GBP" /></p>
-                    <button className="button w-full" disabled={user.user?false:true}>Proceed to Checkout</button>
+                    <button 
+                        className="button w-full" 
+                        disabled={user.user?false:true}
+                        role="link"
+                        onClick={createCheckoutSession}
+                    >Proceed to Checkout</button>
                 </div>
             </div>
 

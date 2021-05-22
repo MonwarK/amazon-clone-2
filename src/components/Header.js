@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import { useRouter } from "next/router"
 import {
@@ -7,8 +7,8 @@ import {
     SearchIcon,
     SunIcon
 } from "@heroicons/react/outline"
-import { useSelector } from 'react-redux'
-import { selectUser } from '../slices/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUser, signIn, signOut } from '../slices/userSlice'
 import { auth } from '../Firebase'
 import Sidebar from './Sidebar'
 import { selectItems } from '../slices/basketSlice'
@@ -20,6 +20,28 @@ function Header() {
     const basket = useSelector(selectItems)
 
     const [sidebar, setSidebar] = useState(false)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        auth.onAuthStateChanged(
+            auth => {
+                if(auth){
+                    dispatch(
+                        signIn({
+                            uid: auth.uid,
+                            email: auth.email,
+                            displayName: auth.displayName
+                        })
+                    )
+                } 
+                else{
+                    dispatch(
+                        signOut()
+                    )
+                }
+            }
+        )
+    }, [])
 
     const changeTheme = () => {
         let htmlClasses = document.querySelector('html').classList;
@@ -60,7 +82,7 @@ function Header() {
                         <p>Hello {user.user?.displayName},</p>
                         <p className="font-extrabold md:text-sm">Account & Lists</p>
                     </div>
-                    <div className="link">
+                    <div className="link" onClick={() => router.push("/orders")}>
                         <p>Returns</p>
                         <p className="font-extrabold md:text-sm">& Orders</p>
                     </div>
