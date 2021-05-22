@@ -34,7 +34,7 @@ function Header() {
 
     return (
         <>
-        <header className="">
+        <header id="header">
 
             {/* Top Navigation */}
             <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">

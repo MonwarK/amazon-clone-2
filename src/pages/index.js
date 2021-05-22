@@ -4,13 +4,9 @@ import { useEffect } from "react";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
-import Sidebar from "../components/Sidebar"
+import Footer from "../components/Footer"
 
 export default function Home({products}) {
-
-  useEffect(() => {
-    Aos.init();
-  }, [])
 
   return (
     <div className="bg-gray-100 dark:bg-gray-800">
@@ -29,6 +25,8 @@ export default function Home({products}) {
         <ProductFeed products={products}/>
 
       </main>
+
+      <Footer />
 
     </div>
   );
