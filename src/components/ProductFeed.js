@@ -1,6 +1,15 @@
 import Product from "./Product";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function ProductFeed({products}) {
+
+    useEffect (() => {
+        Aos.init();
+    }, [])
+
+
     return (
         <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-40">
             {

@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter";
 import QuickView from "./QuickView";
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 export default function Product({id, title, price, description, category, image}) {
     
@@ -16,9 +14,7 @@ export default function Product({id, title, price, description, category, image}
         )
     ) 
 
-    useEffect(() => {
-        Aos.init();
-    }, [])
+   
 
     const [hasPrime] = useState(
         Math.random() > 0.5 ?
@@ -27,7 +23,7 @@ export default function Product({id, title, price, description, category, image}
     )
 
     return (
-        <div data-aos={!visible?"fade-up":null} data-aos-duration="1000" className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
+        <div className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-30":null}`}>
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
 
             <Image src={image} height={200} width={200} objectFit="contain" />
