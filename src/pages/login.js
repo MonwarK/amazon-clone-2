@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { auth, signInWithGoogle } from "../Firebase";
 import { selectUser, signIn, signOut, userSlice } from "../slices/userSlice";
@@ -90,6 +91,8 @@ export default function Home() {
 
         </main>
       }
+
+      <Footer />
     </div>
    
   )

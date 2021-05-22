@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import { selectItems } from '../slices/basketSlice'
 import { selectUser } from '../slices/userSlice'
 import Currency from "react-currency-formatter"
+import Footer from '../components/Footer'
 
 function basket() {
 
@@ -44,6 +45,8 @@ function basket() {
                     <button className="button w-full" disabled={user.user?false:true}>Proceed to Checkout</button>
                 </div>
             </div>
+
+            <Footer />
         </div>
     )
 }

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { auth } from '../Firebase'
 import { selectUser } from '../slices/userSlice'
@@ -80,6 +81,8 @@ function register() {
 
             </main>
         }
+
+        <Footer />
         </div>
     )
 }
