@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToBasket, selectItems } from '../slices/basketSlice'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion } from 'framer-motion'
 
 function QuickView({id, title, price, close, rating, description, category, image}) {
 
@@ -17,7 +18,15 @@ function QuickView({id, title, price, close, rating, description, category, imag
             <div className="bg-black opacity-50 w-full h-full fixed top-0 left-0 z-[90000]" />
 
             <div className="grid items-center fixed top-0 left-0 h-screen w-full z-[100000]">
-                <div className="bg-white rounded-lg mx-auto grid grid-flow-row-dense md:grid-cols-2 w-5/6 p-8 md:p-0 max-w-4xl">
+                <motion.div 
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                    hidden: { scale: 0 },
+                    visible: { scale: 1 },
+                    }}
+                    className="bg-white rounded-lg mx-auto grid grid-flow-row-dense md:grid-cols-2 w-5/6 p-8 md:p-0 max-w-4xl"
+                >
 
                     {/* Image */}
                     <div className="p-14 flex items-center" >
@@ -59,7 +68,7 @@ function QuickView({id, title, price, close, rating, description, category, imag
                         >Add to Basket</button>
                         <button className="button mt-3 w-full" onClick={close}>Close</button>
                     </div>
-                </div>
+                </motion.div>
                 
             <ToastContainer />
             </div>
