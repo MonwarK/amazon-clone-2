@@ -23,10 +23,12 @@ function register() {
             email,
             password
         )
-        .then(() => {
-            auth.updateCurrentUser({
-                displayName: firstName + surname
+        .then((authUser) => {
+            authUser.user.updateProfile({
+                displayName: firstName + " " + surname
             })
+            auth.signOut();
+            alert("User created")
         })
         .catch(err => alert(err))
         
