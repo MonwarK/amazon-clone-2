@@ -25,7 +25,7 @@ function basket() {
                     <hr />
                     {
                         basket.map(({title, price, image}) => 
-                            <div className="py-4 flex">
+                            <div className="p-4 flex shadow-lg my-2 border-solid border-2 ">
                                 <img className="h-36 w-24 object-contain" src={image} />
                                 <div className="flex-1 px-6">
                                     <p className="line-clamp-1 text-blue-500 font-semibold link">{title}</p>

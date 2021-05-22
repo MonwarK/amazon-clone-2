@@ -4,11 +4,11 @@ import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBasket, selectItems } from "../slices/basketSlice";
+import QuickView from "./QuickView";
 
 export default function Product({id, title, price, description, category, image}) {
     
-    const dispatch = useDispatch()
-    const basket = useSelector(selectItems)
+    const [visible, setVisible] = useState(false)
 
     const [rating] = useState(
         Math.floor(
@@ -23,7 +23,7 @@ export default function Product({id, title, price, description, category, image}
     )
 
     return (
-        <div className="relative shadow-lg flex flex-col m-5 bg-white z-30 p-10">
+        <div className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
 
             <Image src={image} height={200} width={200} objectFit="contain" />
@@ -57,17 +57,25 @@ export default function Product({id, title, price, description, category, image}
 
             <button 
                 className="mt-auto button"
-                onClick={() => {
-                    dispatch(addToBasket({
-                        id: id,
-                        title : title, 
-                        price : price, 
-                        description : description, 
-                        category : category, 
-                        image : image
-                    }))
-                }}
-            >Add to Basket</button>
+                onClick={() => setVisible(true)}
+            >View Item</button>
+
+            {
+                visible?
+                <QuickView 
+                    key={id}
+                    id={id}
+                    title={title}
+                    price={price}
+                    description={description}
+                    category={category}
+                    image={image}
+                    rating={rating}
+                    close={() => setVisible(false)}
+                />
+                :null
+            }
+            
         </div>
     )
 }
