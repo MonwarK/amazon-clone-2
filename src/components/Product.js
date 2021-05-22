@@ -27,7 +27,7 @@ export default function Product({id, title, price, description, category, image}
     )
 
     return (
-        <div data-aos="fade-up" data-aos-duration="1000" className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
+        <div data-aos={!visible?"fade-up":null} data-aos-duration="1000" className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
 
             <Image src={image} height={200} width={200} objectFit="contain" />
