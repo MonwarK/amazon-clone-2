@@ -17,10 +17,10 @@ function basket() {
     .reduce((a,b) => a + b, 0)
 
     return (
-        <div className="bg-gray-100 dark:bg-gray-800 min-h-screen">
+        <div className="bg-gray-100 dark:bg-gray-800 min-h-screen flex flex-col">
             <Header />
 
-            <div className="grid grid-flow-row-dense lg:grid-cols-3">
+            <div className="grid grid-flow-row-dense lg:grid-cols-3 flex-1">
                 <div className="bg-white shadow-2xl p-8 lg:col-span-2 m-4">
                     <h1 className="text-2xl mb-5">Shopping Basket</h1>
                     <hr />
