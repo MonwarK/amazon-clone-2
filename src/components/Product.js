@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter";
-import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, selectItems } from "../slices/basketSlice";
 import QuickView from "./QuickView";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function Product({id, title, price, description, category, image}) {
     
@@ -16,6 +16,10 @@ export default function Product({id, title, price, description, category, image}
         )
     ) 
 
+    useEffect(() => {
+        Aos.init();
+    }, [])
+
     const [hasPrime] = useState(
         Math.random() > 0.5 ?
         true
@@ -23,7 +27,7 @@ export default function Product({id, title, price, description, category, image}
     )
 
     return (
-        <div className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
+        <div data-aos="fade-up" data-aos-duration="1000" className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-20":null}`}>
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
 
             <Image src={image} height={200} width={200} objectFit="contain" />
