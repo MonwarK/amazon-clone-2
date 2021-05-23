@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/solid"
 import Currency from "react-currency-formatter";
 import QuickView from "./QuickView";
+import { motion } from "framer-motion";
 
 export default function Product({id, title, price, description, category, image}) {
     
@@ -23,7 +24,15 @@ export default function Product({id, title, price, description, category, image}
     )
 
     return (
-        <div className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-30":null}`}>
+        <motion.div 
+            className={`relative shadow-lg flex flex-col m-5 bg-white p-10 ${!visible?"z-30":null}`}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { scale: 0 },
+              visible: { scale: 1 },
+            }}
+        >
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
 
             <Image src={image} height={200} width={200} objectFit="contain" />
@@ -76,6 +85,6 @@ export default function Product({id, title, price, description, category, image}
                 :null
             }
             
-        </div>
+        </motion.div>
     )
 }

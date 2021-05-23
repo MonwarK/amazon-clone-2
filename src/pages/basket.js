@@ -58,11 +58,12 @@ function basket() {
                         )
                     }
                 </div>
+                    {console.log(basket)}
                 <div className="h-36 bg-white shadow-2xl p-8 md:col-span-1 m-4">
                     <p className="mb-4 text-center font-semibold text-lg">Total price: <Currency quantity={totalPrice} currency="GBP" /></p>
                     <button 
                         className="button w-full" 
-                        disabled={user.user?false:true}
+                        disabled={user.user?basket?true:false:true}
                         role="link"
                         onClick={createCheckoutSession}
                     >Proceed to Checkout</button>

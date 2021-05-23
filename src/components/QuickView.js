@@ -29,13 +29,13 @@ function QuickView({id, title, price, close, rating, description, category, imag
                 >
 
                     {/* Image */}
-                    <div className="p-14 flex items-center" >
-                        <img src={image} />
+                    <div className="md:p-14 m-auto flex items-center" >
+                        <img className="h-36 md:h-auto" src={image} />
                     </div>
 
                     {/* Description */}
                     <div className="py-8 pr-5 flex flex-col">
-                        <h1 className="text-2xl text-yellow-500">{title}</h1>
+                        <h1 className="text-xl md:text-2xl text-yellow-500">{title}</h1>
                         <p className="text-gray-400 my-2 link">{category}</p>
                         <div className="text-yellow-300 flex items-center mb-2">
                             <p className="font-semibold text-md text-black">Rating: </p>
@@ -47,8 +47,8 @@ function QuickView({id, title, price, close, rating, description, category, imag
                                 )
                             } 
                         </div>
-                        <p className="flex-1">{description}</p>
-                        <p className="text-2xl">
+                        <p className="flex-1 line-clamp-2 md:line-clamp-none">{description}</p>
+                        <p className="text-lg md:text-2xl mt-2">
                             <Currency currency="GBP" quantity={price} />
                         </p>
                         <button 
@@ -63,7 +63,7 @@ function QuickView({id, title, price, close, rating, description, category, imag
                                     image : image
                                 }))
 
-                                toast("Add to basket")
+                                toast("Add to basket", {type: "success"})
                             }}
                         >Add to Basket</button>
                         <button className="button mt-3 w-full" onClick={close}>Close</button>
