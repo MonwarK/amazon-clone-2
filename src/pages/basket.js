@@ -63,7 +63,7 @@ function basket() {
                     <p className="mb-4 text-center font-semibold text-lg">Total price: <Currency quantity={totalPrice} currency="GBP" /></p>
                     <button 
                         className="button w-full" 
-                        disabled={user.user?basket?true:false:true}
+                        disabled={user.user?false:true}
                         role="link"
                         onClick={createCheckoutSession}
                     >Proceed to Checkout</button>
