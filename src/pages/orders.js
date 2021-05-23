@@ -41,8 +41,9 @@ function orders() {
 
                 <div className="mt-5 space-y-4">
                     {
-                        orders?.map(({data:{amount, amount_shipping, images, timestamp}}) => 
+                        orders?.map(({id, data:{amount, amount_shipping, images, timestamp}}) => 
                             <OrderItem 
+                                id={id}
                                 amount={amount}
                                 shippingPrice={amount_shipping}
                                 images={images}

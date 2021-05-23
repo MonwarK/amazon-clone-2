@@ -1,7 +1,7 @@
 import React from 'react'
 import Currency from "react-currency-formatter"
 
-function OrderItem({amount, shippingPrice, images, timestamp}) {
+function OrderItem({id, amount, shippingPrice, images, timestamp}) {
     return (
         <div className="w-full bg-white border-solid border-4 border-gray-200">
             <div className="bg-gray-200 md:flex justify-between p-4">
@@ -14,7 +14,7 @@ function OrderItem({amount, shippingPrice, images, timestamp}) {
                     <p><Currency quantity={amount} currency="gbp" /> - Next Day Delivery <Currency quantity={shippingPrice} currency="gbp" /></p>
                 </div>
                 <div className="mb-5">
-                    <p className="font-semibold">ORDER ID</p>
+                    <p className="font-semibold text-sm">ORDER ID: {id.slice(0, 20)}</p>
                     <p className="text-blue-500">{images.length} Items</p>
                 </div>
             </div>
